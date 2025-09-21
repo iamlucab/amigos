@@ -1,11 +1,7 @@
-name: Deploy Laravel Code (Full First Upload)
+name: Full Deploy to GoDaddy (one-time setup)
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - 'v*.*.*'
+  workflow_dispatch:   # Run manually from Actions tab
 
 jobs:
   ftp-deploy:
@@ -13,20 +9,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # needed to get full tags
 
-      - name: Get version from tag
-        id: get_version
-        run: |
-          VERSION=$(git describe --tags --abbrev=0 || echo "v0.0.0")
-          echo "version=$VERSION" >> $GITHUB_ENV
-          echo "🔖 Deploying version: $VERSION"
-
-      - name: Write version to file
-        run: echo "${{ env.version }}" > version.txt
-
-      - name: Deploy all files via FTP (first full deploy)
+      - name: Deploy ALL Laravel files via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -37,9 +21,63 @@ jobs:
           server-dir: /
           security: loose
           dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/vendor/**
+            **/storage/framework/cache/**
+            **/storage/logs/**
+            **/storage/debugbar/**
+            **/tests/**
 
 
-# # This workflow deploys only models, controllers, views, and routes to GoDaddy
+
+# ****************************************************************************************
+
+
+# name: Deploy Laravel Code (Full First Upload)
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     tags:
+#       - 'v*.*.*'
+
+# jobs:
+#   ftp-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0 # needed to get full tags
+
+#       - name: Get version from tag
+#         id: get_version
+#         run: |
+#           VERSION=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+#           echo "version=$VERSION" >> $GITHUB_ENV
+#           echo "🔖 Deploying version: $VERSION"
+
+#       - name: Write version to file
+#         run: echo "${{ env.version }}" > version.txt
+
+#       - name: Deploy all files via FTP (first full deploy)
+#         uses: SamKirkland/FTP-Deploy-Action@4.3.0
+#         with:
+#           server: ${{ secrets.FTP_SERVER }}
+#           username: ${{ secrets.FTP_USERNAME }}
+#           password: ${{ secrets.FTP_PASSWORD }}
+#           port: 21
+#           local-dir: ./
+#           server-dir: /
+#           security: loose
+#           dangerous-clean-slate: false
+
+# **********************************************************************************************************
+# This workflow deploys only models, controllers, views, and routes to GoDaddy
 
 # name: Deploy Laravel Code (Models, Controllers, Views, Routes)
 

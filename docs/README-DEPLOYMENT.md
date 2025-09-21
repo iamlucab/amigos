@@ -44,7 +44,7 @@ php deploy.php
 ### FTP Settings
 The deployment is configured for:
 - **Host:** ebili.online
-- **Username:** admin@ebili.online
+- **Username:** admin@amigostayo.com
 - **Remote Path:** / (root directory)
 - **Port:** 21 (standard FTP)
 

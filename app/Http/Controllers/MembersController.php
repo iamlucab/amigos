@@ -75,7 +75,7 @@ class MembersController extends Controller
             'name' => $validated['first_name'] . ' ' . $validated['last_name'],
             'email' => $validated['mobile_number'] . '@amigostayo.com',
             'mobile_number' => $validated['mobile_number'],
-            'password' => \Hash::make('password123'), // Default password
+            'password' => \Hash::make('secret123'), // Default password
             'role' => $validated['role'],
             'member_id' => $member->id,
             'status' => $validated['status'],

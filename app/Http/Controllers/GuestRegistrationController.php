@@ -69,7 +69,7 @@ class GuestRegistrationController extends Controller
 
         User::create([
             'name'          => $member->first_name . ' ' . $member->last_name,
-            'email'         => $request->mobile_number . '@ebili.online',
+            'email'         => $request->mobile_number . '@amigostayo.com',
             'mobile_number' => $request->mobile_number,
             'password'      => Hash::make($request->password),
             'role'          => 'Member',
@@ -160,7 +160,7 @@ class GuestRegistrationController extends Controller
 
         User::create([
             'name'          => $member->first_name . ' ' . $member->last_name,
-            'email'         => $request->mobile_number . '@ebili.online',
+            'email'         => $request->mobile_number . '@amigostayo.com',
             'mobile_number' => $request->mobile_number,
             'password'      => Hash::make($request->password),
             'role'          => 'Member',

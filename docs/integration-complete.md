@@ -47,7 +47,7 @@ All configurations from your `.env.example` file have been successfully integrat
 
 #### 7. **Mail Configuration**
 - ✅ SMTP configured with Gmail
-- ✅ From address: support@ebili.online
+- ✅ From address: support@amigostayo.com
 - ✅ From name: E-Bili Support
 
 ### 🚀 Your Application is Ready!

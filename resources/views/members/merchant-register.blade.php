@@ -3,12 +3,13 @@
         <form method="POST" action="{{ route('member.merchant.register') }}">
             @csrf
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Become a Merchant</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+              <div class="modal-header bg-info text-white">
+    <h5 class="modal-title text-white" >Become a Merchant</h5>
+    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
 
                 <div class="modal-body">
                     @if ($errors->any())

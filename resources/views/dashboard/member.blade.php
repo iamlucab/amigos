@@ -333,13 +333,15 @@
     </div>
 </div>
 
-{{-- ✅ Referral Network Card --}}
+
+{{-- ✅ Referral Network & Merchant Card --}}
 <div class="row mb-4">
   <div class="col-12">
     <div class="card shadow-sm" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); border: none;">
       <div class="card-body text-white p-3">
         <div class="row align-items-center">
-          <div class="col-8">
+          {{-- Referral Network Column --}}
+          <div class="col-12 col-md-6 mb-3 mb-md-0 d-flex flex-column align-items-center justify-content-center text-center">
             <h6 class="card-title mb-1" style="color: white !important; font-size: 0.9rem;">
               <i class="bi bi-people-fill me-1"></i>My Referral Network
             </h6>
@@ -350,19 +352,31 @@
             <p class="mb-0 small" style="color: rgba(255,255,255,0.9); font-size: 0.75rem;">
               Total Network: <strong>{{ auth()->user()->member->getTotalReferralCount() }}</strong>
             </p>
-          </div>
-          <div class="col-4 text-end">
-            <a href="{{ route('member.referral.summary') }}" class="btn btn-light btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+            <a href="{{ route('member.referral.summary') }}" class="btn btn-light btn-sm mt-2 mx-auto" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">
               <i class="bi bi-eye me-1"></i> View
             </a>
+          </div>
+          {{-- Merchant Button Column --}}
+          <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center text-center">
+            <h4 class="card-title mb-2" style="color: white !important; font-size: 0.9rem;">
+              <i class="bi bi-shop me-1" style="color: white !important; font-size: 0.9rem;"  ></i>Become a Merchant
+            </h4>
+            <button type="button"
+              class="btn btn-warning btn-sm mx-auto"
+              data-toggle="modal"
+              data-target="#merchantRegisterModal"
+              style="font-size: 0.85rem; padding: 0.4rem 1.2rem; color: #212529;">
+              <i class="bi bi-shop me-1"></i> Register as Merchant
+            </button>
+            <div class="small mt-2" style="color: rgba(255,255,255,0.85); font-size: 0.75rem;">
+              Enjoy more benefits and reach more customers!
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
 
 {{-- ✅ Dashboard Action Icons (Mobile-Optimized Inline Layout) --}}
 <div class="d-flex flex-wrap justify-content-around text-center mb-4" style="gap: 0.5rem;">
@@ -426,12 +440,12 @@
     </a>
 
     {{-- Become a Merchant --}}
-    <a href="#" data-toggle="modal" data-target="#merchantRegisterModal" class="text-decoration-none text-dark" style="flex: 0 0 30%; max-width: 30%;">
+    {{-- <a href="#" data-toggle="modal" data-target="#merchantRegisterModal" class="text-decoration-none text-dark" style="flex: 0 0 30%; max-width: 30%;">
         <div class="card shadow-sm p-2 p-sm-3">
              <i class="bi bi-shop fa-lg text-success mb-1"></i>
             <div class="small" style="font-size: 0.75rem;">Merchant</div>
         </div>
-    </a>
+    </a> --}}
 
 </div>
 
@@ -1541,11 +1555,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const memberId = {{ auth()->user()->member->id ?? 'null' }};
             const referralUrl = `${window.location.origin}/join/${memberId}`;
 
-            const shareText = `🎉 Join Amigos '98 Online through my referral link and we both get bonuses!\n\n` +
+            const shareText = `🎉 Join Amigo Community Online through my referral link and we both get bonuses!\n\n` +
                              `👤 Referred by: {{ auth()->user()->name }}\n` +
                              `📱 Mobile: {{ auth()->user()->mobile_number }}\n\n` +
                              `💰 Benefits:\n` +
-                             `• Shop and earn cashback\n` +
+                             `• Kapit-Bisig! kahit Online. a Bayanihan in concept with Shop and earn cashback program\n` +
                              `• Refer friends and earn bonuses\n` +
                              `• Access to exclusive deals\n\n` +
                              `🔗 Register here: ${referralUrl}\n\n` +

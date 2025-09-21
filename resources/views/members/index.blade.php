@@ -12,7 +12,7 @@
     <h2 class="fw-bold mb-2" style="color: var(--primary-purple);">
         <i class="bi bi-people me-2"></i>Members Management
     </h2>
-    <p class="slogan mb-0" style="font-size: 0.9rem;">Manage Your E-Bili Community Members</p>
+    <p class="slogan mb-0" style="font-size: 0.9rem;">Manage Your Amigos Community Members</p>
 </div>
 @stop
 
@@ -176,7 +176,7 @@
                 text-align: left;
                 margin-bottom: 1rem;
             }
-            
+
             .table-responsive {
                 border-radius: 15px;
             }

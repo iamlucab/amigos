@@ -18,8 +18,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./
-          server-dir: /home/j962ha25gwoq/public_html/amigos/   # adjust to your folder
-          #server-dir: ./   # root of your FTP login, which is already /amigos
+          server-dir: /    # root of your FTP login (your FTP account already points to /amigos)
           security: loose
           dangerous-clean-slate: false
           exclude: |

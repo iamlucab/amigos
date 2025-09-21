@@ -1,12 +1,10 @@
-name: Deploy Laravel Code (Full First Upload)
+name: Deploy Laravel Code (Full Upload with Public)
 
 on:
-  workflow_dispatch:   # run manually from Actions tab
+  workflow_dispatch:   # manual trigger
   push:
     branches:
       - main
-    tags:
-      - 'v*.*.*'
 
 jobs:
   ftp-deploy:
@@ -14,20 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # needed to get full tags
 
-      - name: Get version from tag
-        id: get_version
-        run: |
-          VERSION=$(git describe --tags --abbrev=0 || echo "v0.0.0")
-          echo "version=$VERSION" >> $GITHUB_ENV
-          echo "🔖 Deploying version: $VERSION"
-
-      - name: Write version to file
-        run: echo "${{ env.version }}" > version.txt
-
-      - name: Deploy all files via FTP (first full deploy)
+      - name: Deploy Laravel files to GoDaddy
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -35,22 +21,13 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./
-          server-dir: /      # since your FTP root is already /amigos
-          security: loose
-          dangerous-clean-slate: false
+          server-dir: ./
           exclude: |
             **/.git*
             **/.github/**
             **/node_modules/**
-            vendor/**
-            tests/**
-            storage/framework/cache/**
-            storage/framework/sessions/**
-            storage/framework/views/**
-            storage/logs/**
-            storage/debugbar/**
-            .env
-            .env.*
-            .gitattributes
-            .gitignore
-            .ftpconfig
+            **/vendor/**
+            **/storage/framework/cache/**
+            **/storage/logs/**
+            **/storage/debugbar/**
+            **/tests/**

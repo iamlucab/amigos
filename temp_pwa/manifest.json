@@ -1,0 +1,24 @@
+{
+  "name": "Amigos 98 Community",
+  "short_name": "Amigos 98 Community",
+  "description": "Amigos 98 Community - Share ot Earn! Amigos 98 Community Selling System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/storage/app/public/icons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/storage/app/public/icons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

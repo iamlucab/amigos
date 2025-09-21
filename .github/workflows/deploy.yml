@@ -1,6 +1,4 @@
-# This workflow deploys only models, controllers, views, and routes to GoDaddy
-
-name: Deploy Laravel Code (Models, Controllers, Views, Routes)
+name: Deploy Laravel Code (Full First Upload)
 
 on:
   push:
@@ -15,8 +13,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # needed to get full tags
 
-      - name: Deploy selected folders/files via FTP
+      - name: Get version from tag
+        id: get_version
+        run: |
+          VERSION=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "🔖 Deploying version: $VERSION"
+
+      - name: Write version to file
+        run: echo "${{ env.version }}" > version.txt
+
+      - name: Deploy all files via FTP (first full deploy)
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -25,11 +35,44 @@ jobs:
           port: 21
           local-dir: ./
           server-dir: /
-          exclude: |
-            *
-            !app/Models/**
-            !app/Http/Controllers/**
-            !resources/views/**
-            !routes/**
           security: loose
           dangerous-clean-slate: false
+
+
+# # This workflow deploys only models, controllers, views, and routes to GoDaddy
+
+# name: Deploy Laravel Code (Models, Controllers, Views, Routes)
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     tags:
+#       - 'v*.*.*'
+
+# jobs:
+#   ftp-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Deploy selected folders/files via FTP
+#         uses: SamKirkland/FTP-Deploy-Action@4.3.0
+#         with:
+#           server: ${{ secrets.FTP_SERVER }}
+#           username: ${{ secrets.FTP_USERNAME }}
+#           password: ${{ secrets.FTP_PASSWORD }}
+#           port: 21
+#           local-dir: ./
+#           server-dir: /
+#           exclude: |
+#             *
+#             !app/Models/**
+#             !app/Http/Controllers/**
+#             !resources/views/**
+#             !routes/**
+#           security: loose
+#           dangerous-clean-slate: false
+
+

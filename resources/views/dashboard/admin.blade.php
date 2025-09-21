@@ -13,7 +13,7 @@
     <div class="logo-container mx-auto mb-3" style="width: 80px; height: 80px;">
         <img src="{{ asset('ebili-logo.png') }}" alt="Amigos \'98'" style="width: 80px; height: 80px; object-fit: contain;">
     </div>
-    
+
     <h2 class="fw-bold mb-2" style="color: var(--primary-purple);">Admin Dashboard</h2>
     <p class="slogan mb-0" style="font-size: 0.9rem;">Manage Your Amigos '98 Community</p>
 </div>
@@ -110,7 +110,7 @@
                 </div>
             </a>
         </div>
-        
+
         <div class="col-6 col-md-4 mb-4">
             <a href="{{ route('wallet.index') }}" class="text-decoration-none">
                 <div class="card fade-in p-4 h-100">
@@ -135,7 +135,7 @@
             @php
                 $config = \App\Models\ReferralConfiguration::getActive();
             @endphp
-            
+
             @if ($config)
                 <div class="row">
                     <div class="col-md-6">
@@ -200,6 +200,16 @@
 </div>
 
 </div>
+
+@php
+    $versionFile = base_path('version.txt');
+    $version = file_exists($versionFile) ? trim(file_get_contents($versionFile)) : 'v1.0.0';
+@endphp
+
+<div style="position: fixed; bottom: 5px; right: 10px; font-size: 0.8rem; color: #888;">
+    Version {{ $version }}
+</div>
 @stop
+
 
 {{-- @include('partials.mobile-footer') --}}

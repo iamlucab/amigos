@@ -1,0 +1,15 @@
+name: 🔙 Rollback Production
+
+on:
+  push:
+    branches:
+      - rollback  # Push to 'rollback' branch to trigger rollback
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔁 Trigger Rollback Script
+        run: |
+          curl -sS "https://ebili.online/public/rollback.php?key=Coders123"
